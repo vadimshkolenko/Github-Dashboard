@@ -1,0 +1,13 @@
+.lastCommit {
+  opacity: 0.6;
+  font-weight: 400;
+  font-size: 13px;
+  margin-bottom: 13px;
+}
+
+@media (min-width: 578px) {
+  .lastCommit {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+}

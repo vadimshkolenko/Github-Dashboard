@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import styles from './Repositories.module.css'
+import styles from './Repositories.module.scss'
 import RepositoryCard from '../RepositoryCard/RepositoryCard'
 import { RepositoriesData } from '../../models/store/repository'
 import { RepositoryCardTypes } from '../../models/store/repository'
@@ -27,7 +27,7 @@ const Repositories: FC<Props> = ({
   }
 
   return (
-    <>
+    <section className={styles.wrapper}>
       {repositories.map((repository: RepositoryCardTypes) => (
         <RepositoryCard
           key={repository.id}
@@ -38,7 +38,7 @@ const Repositories: FC<Props> = ({
           html_url={repository.html_url}
         />
       ))}
-    </>
+    </section>
   )
 }
 

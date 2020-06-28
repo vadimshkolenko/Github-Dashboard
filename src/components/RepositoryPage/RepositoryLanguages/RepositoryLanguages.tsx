@@ -1,8 +1,9 @@
 import React, { useEffect, useState, FC, useMemo } from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '../../store/reducers'
-import { fetchLanguages } from '../../store/action-creators'
+import styles from './RepositoryLanguages.module.scss'
+import { RootState } from '../../../store/reducers'
+import { fetchLanguages } from '../../../store/action-creators'
 
 const RepositoryLanguages: FC<Props> = ({
   languages_url,
@@ -19,16 +20,17 @@ const RepositoryLanguages: FC<Props> = ({
     return <div>Загрузка...</div>
   }
 
-  if (languages !== undefined) {
+  if (languages !== undefined && Object.keys(languages).length !== 0) {
     return (
-      <div>
-        {Object.entries(languages).map((lang, index) => (
-          <div key={index}>
-            <p>
-              {lang[0]}: {lang[1]}
-            </p>
-          </div>
-        ))}
+      <div className={styles.wrapper}>
+        <h2 className={styles.title}>Top languages</h2>
+        <ul className={styles.list}>
+          {Object.entries(languages).map((lang, index) => (
+            <li className={styles.item} key={index}>
+              {lang[0]}
+            </li>
+          ))}
+        </ul>
       </div>
     )
   } else {

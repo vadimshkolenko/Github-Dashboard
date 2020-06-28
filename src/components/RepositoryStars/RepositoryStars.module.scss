@@ -1,0 +1,26 @@
+.stars {
+  display: flex;
+  align-items: center;
+
+  .starIcon {
+    width: 20px;
+    margin-right: 3px;
+  }
+
+  .starsCount {
+    font-weight: 400;
+  }
+}
+
+@media (min-width: 578px) {
+  .stars {
+    .starIcon {
+      width: 25px;
+      margin-right: 5px;
+    }
+  
+    .starsCount {
+      font-size: 20px;
+    }
+  }
+}

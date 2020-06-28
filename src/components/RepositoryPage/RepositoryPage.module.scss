@@ -1,0 +1,59 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+
+  .mainInfoWrapper {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+
+    .mainInfoText {
+      display: flex;
+      flex-direction: column;
+
+      .nameAndStarsWrapper {
+        display: flex;
+        margin-bottom: 5px;
+
+        .name {
+          margin-right: 15px;
+          font-size: 18px;
+          font-weight: 400;
+        }
+      }
+
+      .description {
+        font-size: 15px;
+        font-weight: 200;
+      }
+    }
+  }
+}
+
+@media (min-width: 578px) {
+  .pageWrapper {
+    width: 80%;
+
+    .mainInfoWrapper {
+      margin-bottom: 15px;
+
+      .mainInfoText {
+
+        .nameAndStarsWrapper {
+          margin-bottom: 5px;
+
+          .name {
+            margin-right: 25px;
+            font-size: 30px;
+          }
+        }
+
+        .description {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
