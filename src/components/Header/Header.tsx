@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { NavLink } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 import logo from '../../assets/images/logo.png'
@@ -8,9 +7,9 @@ const Header: FC = () => {
   return (
     <header>
       <div className={styles.logoWrapper}>
-        <NavLink to="https://github.com/" target="_blank">
+        <a href="https://github.com">
           <img src={logo} alt="Логотип GitHub" />
-        </NavLink>
+        </a>
       </div>
       <div className={styles.projectName}>GITHUB DASHBOARD</div>
     </header>
