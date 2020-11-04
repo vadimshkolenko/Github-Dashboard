@@ -4,6 +4,7 @@ import {
   FETCH_REPOSITORIES_START,
   FETCH_REPOSITORIES_SUCCESS,
   FETCH_REPOSITORIES_FAIL,
+  SET_QUERY,
 } from './../common'
 
 const initialState: RepositoriesState = {
@@ -11,6 +12,7 @@ const initialState: RepositoriesState = {
   loaded: false,
   error: null,
   entities: [],
+  query: '',
 }
 
 export const repositoriesReducer = (
@@ -37,6 +39,15 @@ export const repositoriesReducer = (
         loading: false,
         loaded: false,
         error: action.error,
+      }
+    case SET_QUERY:
+      return {
+        ...repositoriesState,
+        query: action.payload,
+        loading: false,
+        loaded: false,
+        error: null,
+        entities: [],
       }
     default:
       return repositoriesState

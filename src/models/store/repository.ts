@@ -3,6 +3,7 @@ export interface RepositoriesState {
   loaded: boolean
   error: null | string
   entities: Array<RepositoriesData>
+  query: string
 }
 
 export interface RepositoriesData {

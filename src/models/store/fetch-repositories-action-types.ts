@@ -2,6 +2,7 @@ import {
   FETCH_REPOSITORIES_START,
   FETCH_REPOSITORIES_SUCCESS,
   FETCH_REPOSITORIES_FAIL,
+  SET_QUERY,
 } from './../../store/common'
 import { RepositoriesData } from './repository'
 
@@ -19,7 +20,13 @@ interface FetchRepositoriesFailActionType {
   error: null | string
 }
 
+interface SetQueryActionType {
+  type: typeof SET_QUERY
+  payload: string
+}
+
 export type FetchRepositoriesActionTypes =
   | FetchRepositoriesStartActionType
   | FetchRepositoriesSuccessActionType
   | FetchRepositoriesFailActionType
+  | SetQueryActionType

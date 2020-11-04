@@ -13,10 +13,15 @@ const Repositories: FC<Props> = ({
   repositoriesLoading,
   repositoriesLoaded,
   fetchRepositories,
+  query,
 }) => {
   useEffect(() => {
-    !repositoriesLoading && !repositoriesLoaded && fetchRepositories()
-  }, [fetchRepositories, repositoriesLoading, repositoriesLoaded])
+    !repositoriesLoading && !repositoriesLoaded && fetchRepositories(query)
+  }, [fetchRepositories, repositoriesLoading, repositoriesLoaded, query])
+
+  if (repositories === undefined && repositoriesLoaded) {
+    return <div>rate limit exceeded</div>
+  }
 
   if (repositories.length === 0 && repositoriesLoaded) {
     return <div>Данные по вашему запросу отсутствуют</div>
@@ -47,12 +52,14 @@ interface Props {
   repositoriesLoading: boolean
   repositoriesLoaded: boolean
   fetchRepositories: any
+  query: string
 }
 
 const mapStateToProps = (state: RootState) => ({
   repositories: state.repositories.entities,
   repositoriesLoading: state.repositories.loading,
   repositoriesLoaded: state.repositories.loaded,
+  query: state.repositories.query,
 })
 
 const mapDispatchToProps = {

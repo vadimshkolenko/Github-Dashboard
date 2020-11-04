@@ -13,16 +13,17 @@ import {
   FETCH_CONTRIBUTORS_START,
   FETCH_CONTRIBUTORS_SUCCESS,
   FETCH_CONTRIBUTORS_FAIL,
+  SET_QUERY,
 } from './../common'
 
-export const fetchRepositories = () => (
+export const fetchRepositories = (query: string) => (
   dispatch: Dispatch<FetchRepositoriesActionTypes>
 ): void => {
   dispatch({
     type: FETCH_REPOSITORIES_START,
   })
   fetch(
-    'https://api.github.com/search/repositories?q=stars:>0&sort=stars&order=desc&page=1&per_page=10'
+    `https://api.github.com/search/repositories?q=${query}+stars:>0&sort=stars&order=desc&page=1&per_page=10`
   )
     .then((res) => res.json())
     .then((res) =>
@@ -82,3 +83,8 @@ export const fetchContributors = (url: string) => (
       })
     })
 }
+
+export const setQuery = (query: string) => ({
+  type: SET_QUERY,
+  payload: query,
+})
