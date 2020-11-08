@@ -2,11 +2,12 @@ export interface RepositoriesState {
   loading: boolean
   loaded: boolean
   error: null | string
-  entities: Array<RepositoriesData>
+  entities: RepositoriesData | undefined
   query: string
+  page: number
 }
 
-export interface RepositoriesData {
+export interface Repository {
   id: number
   name: string
   stargazers_count: number
@@ -16,6 +17,12 @@ export interface RepositoriesData {
   description: string
   contributors_url: string
   languages_url: string
+}
+
+export interface RepositoriesData {
+  total_count?: number
+  incomplete_results?: boolean
+  items?: Array<Repository>
 }
 
 export interface Owner {

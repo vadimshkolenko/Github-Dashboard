@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import styles from './Repositories.module.scss'
 import RepositoryCard from '../RepositoryCard/RepositoryCard'
-import { RepositoriesData } from '../../models/store/repository'
+import { Repository } from '../../models/store/repository'
 import { RepositoryCardTypes } from '../../models/store/repository'
 import { RootState } from '../../store/reducers'
 import { fetchRepositories } from '../../store/action-creators'
@@ -14,16 +14,19 @@ const Repositories: FC<Props> = ({
   repositoriesLoaded,
   fetchRepositories,
   query,
+  page,
 }) => {
   useEffect(() => {
-    !repositoriesLoading && !repositoriesLoaded && fetchRepositories(query)
-  }, [fetchRepositories, repositoriesLoading, repositoriesLoaded, query])
+    !repositoriesLoading &&
+      !repositoriesLoaded &&
+      fetchRepositories(query, page)
+  }, [fetchRepositories, repositoriesLoading, repositoriesLoaded, query, page])
 
   if (repositories === undefined && repositoriesLoaded) {
     return <div>rate limit exceeded</div>
   }
 
-  if (repositories.length === 0 && repositoriesLoaded) {
+  if (repositories?.length === 0 && repositoriesLoaded) {
     return <div>Данные по вашему запросу отсутствуют</div>
   }
 
@@ -33,7 +36,7 @@ const Repositories: FC<Props> = ({
 
   return (
     <section className={styles.wrapper}>
-      {repositories.map((repository: RepositoryCardTypes) => (
+      {repositories?.map((repository: RepositoryCardTypes) => (
         <RepositoryCard
           key={repository.id}
           id={repository.id}
@@ -48,18 +51,20 @@ const Repositories: FC<Props> = ({
 }
 
 interface Props {
-  repositories: Array<RepositoriesData>
+  repositories: Array<Repository> | undefined
   repositoriesLoading: boolean
   repositoriesLoaded: boolean
   fetchRepositories: any
   query: string
+  page: number
 }
 
 const mapStateToProps = (state: RootState) => ({
-  repositories: state.repositories.entities,
+  repositories: state.repositories.entities?.items,
   repositoriesLoading: state.repositories.loading,
   repositoriesLoaded: state.repositories.loaded,
   query: state.repositories.query,
+  page: state.repositories.page,
 })
 
 const mapDispatchToProps = {

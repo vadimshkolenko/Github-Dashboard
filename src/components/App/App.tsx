@@ -8,6 +8,7 @@ import Header from '../Header/Header'
 import Search from '../Search/Search'
 import Repositories from '../Repositories/Repositories'
 import RepositoryPage from '../RepositoryPage/RepositoryPage'
+import Paginator from '../Paginator/Paginator'
 
 const App: FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: FC = () => {
         <Header />
         <Route exact path="/" component={Search} />
         <Route exact path="/" component={Repositories} />
+        <Route exact path="/" component={Paginator} />
         <Route path="/repository/:id" render={() => <RepositoryPage />} />
       </Router>
     </Provider>

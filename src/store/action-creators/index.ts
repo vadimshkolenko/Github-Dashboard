@@ -14,22 +14,23 @@ import {
   FETCH_CONTRIBUTORS_SUCCESS,
   FETCH_CONTRIBUTORS_FAIL,
   SET_QUERY,
+  SET_PAGE,
 } from './../common'
 
-export const fetchRepositories = (query: string) => (
+export const fetchRepositories = (query: string, page: number) => (
   dispatch: Dispatch<FetchRepositoriesActionTypes>
 ): void => {
   dispatch({
     type: FETCH_REPOSITORIES_START,
   })
   fetch(
-    `https://api.github.com/search/repositories?q=${query}+stars:>0&sort=stars&order=desc&page=1&per_page=10`
+    `https://api.github.com/search/repositories?q=${query}+stars:>0&sort=stars&order=desc&page=${page}&per_page=10`
   )
     .then((res) => res.json())
     .then((res) =>
       dispatch({
         type: FETCH_REPOSITORIES_SUCCESS,
-        response: res.items,
+        response: res,
       })
     )
     .catch((error) => {
@@ -87,4 +88,9 @@ export const fetchContributors = (url: string) => (
 export const setQuery = (query: string) => ({
   type: SET_QUERY,
   payload: query,
+})
+
+export const setPage = (page: number) => ({
+  type: SET_PAGE,
+  payload: page,
 })

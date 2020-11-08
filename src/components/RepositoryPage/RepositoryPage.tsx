@@ -8,7 +8,7 @@ import RepositoryStars from '../RepositoryStars/RepositoryStars'
 import RepositoryUpdate from '../RepositoryUpdate/RepositoryUpdate'
 import RepositoryLanguages from './RepositoryLanguages/RepositoryLanguages'
 import RepositoryContributors from './RepositoryContributors/RepositoryContributors'
-import { RepositoriesData } from '../../models/store/repository'
+import { Repository } from '../../models/store/repository'
 import { RootState } from '../../store/reducers'
 import { fetchRepositories } from '../../store/action-creators'
 
@@ -20,14 +20,14 @@ const RepositoryPage: FC<Props> = ({
 }) => {
   const { id } = useParams()
 
-  const [repository, setRepository] = useState<RepositoriesData>()
+  const [repository, setRepository] = useState<Repository>()
 
   useEffect(() => {
     !repositoriesLoading && !repositoriesLoaded && fetchRepositories()
   }, [fetchRepositories, repositoriesLoading, repositoriesLoaded])
 
   useMemo(() => {
-    setRepository(repositories.find((rep) => rep.id === Number(id)))
+    setRepository(repositories?.find((rep) => rep.id === Number(id)))
   }, [repositories])
 
   if (repositoriesLoading) {
@@ -65,14 +65,14 @@ const RepositoryPage: FC<Props> = ({
 }
 
 interface Props {
-  repositories: Array<RepositoriesData>
+  repositories: Array<Repository> | undefined
   repositoriesLoading: boolean
   repositoriesLoaded: boolean
   fetchRepositories: any
 }
 
 const mapStateToProps = (state: RootState) => ({
-  repositories: state.repositories.entities,
+  repositories: state.repositories.entities?.items,
   repositoriesLoading: state.repositories.loading,
   repositoriesLoaded: state.repositories.loaded,
 })
