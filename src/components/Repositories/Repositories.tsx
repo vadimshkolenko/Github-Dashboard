@@ -23,15 +23,17 @@ const Repositories: FC<Props> = ({
   }, [fetchRepositories, repositoriesLoading, repositoriesLoaded, query, page])
 
   if (repositories === undefined && repositoriesLoaded) {
-    return <div>rate limit exceeded</div>
+    return <div className={styles.wrapper}>rate limit exceeded</div>
   }
 
   if (repositories?.length === 0 && repositoriesLoaded) {
-    return <div>Данные по вашему запросу отсутствуют</div>
+    return (
+      <div className={styles.wrapper}>Данные по вашему запросу отсутствуют</div>
+    )
   }
 
   if (repositoriesLoading) {
-    return <div>Загрузка...</div>
+    return <div className={styles.wrapper}>Загрузка...</div>
   }
 
   return (
